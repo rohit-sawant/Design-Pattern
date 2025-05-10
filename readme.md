@@ -59,6 +59,12 @@ src
 
 </details>
 
+[//]: # (strategy desing pattern)
+<details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#strategy-design">Strategy Design</a></summary>
+</details>
+
+
 
 ---
 ## S.O.L.I.D PRINCIPLE
@@ -123,8 +129,7 @@ public interface Invoice {
 - do not break existing code
 - simplifies testing
 - adding new feature is less risky
-  d
-
+  
 #### Disadv
 
 - More boiler plate
@@ -415,7 +420,78 @@ public class NotificationManager {
 
 ```
 
+### Strategy Design
 
+#### Desc
+- In Startegy Design pattern we create an interface and it's different implementation based on strategy !! And inject appropriate startegy in client class by creating constructor or any injection of your choice
+- Eg `@Component` in Springboot
+
+#### Adv
+- similar to open/closed
+- Easy to test
+
+#### Disadv
+- kill for a child class strategy is never goona change
+- Easy to test
+
+#### Difference between Open/closed and Strategy
+
+| Aspect          | Strategy                            | Open/closed                                     |
+|-----------------|-------------------------------------|-------------------------------------------------|
+| what is it      | Design                              | Principle                                       |
+| goal            | Flexible behaviour; runtime changes | Achieve extensibility without code modification |
+| when to apply?  | runtime algo selection              | add new features without changing old code      |
+
+#### Example
+
+- Wrong
+
+```java
+/**
+ * 🛑 The PaymentProcessor is deciding which algorithm to use, and also contains the logic — it violates the Separation of Concerns.
+ */
+public class PaymentProcessor {
+    public void pay(String type) {
+        if (type.equals("CreditCard")) {
+            // Credit card logic
+        } else if (type.equals("UPI")) {
+            // UPI logic
+        } else if (type.equals("PayPal")) {
+            // PayPal logic
+        }
+    }
+} 
+```
+
+- Right
+
+```java
+/**
+ * Strategy Pattern delegates the algorithm to a separate interchangeable class.
+ */
+public interface PaymentMethod {
+    void pay();
+}
+
+public class CreditCardPayment implements PaymentMethod {
+    public void pay() {
+        System.out.println("Paying with Credit Card");
+    }
+}
+
+public class UpiPayment implements PaymentMethod {
+    public void pay() {
+        System.out.println("Paying with UPI");
+    }
+}
+
+
+public class PaymentStrategy {
+    public void processPayment(PaymentMethod method) {
+        method.pay();
+    }
+}
+```
 
 
 
