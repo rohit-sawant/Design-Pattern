@@ -1,4 +1,4 @@
-package org.example.solid.singleResponsibility.wrong;
+package org.designPatterns.solid.singleResponsibility.wrong;
 
 public interface Invoice {
     public void calculateTotal() ;

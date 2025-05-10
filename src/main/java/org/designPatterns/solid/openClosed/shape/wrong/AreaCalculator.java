@@ -1,4 +1,4 @@
-package org.example.solid.openClosed.shape.wrong;
+package org.designPatterns.solid.openClosed.shape.wrong;
 
 public class AreaCalculator {
     public double calculateArea(Object shape) {

@@ -1,4 +1,4 @@
-package org.example.solid.liskovSubstitution.right;
+package org.designPatterns.solid.openClosed.shape.right;
 
 interface Shape {
 

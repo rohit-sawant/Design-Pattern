@@ -1,17 +1,15 @@
-package org.example.solid.interfaceSegregation.right;
+package org.designPatterns.solid.liskovSubstitution.wrong;
+
 
 /**
- * Seperated shapes with Area  thus following ISP
+ * 🛑 wrong examples as All shapes(line) do not have an area
  */
-interface Shape {
-
-}
-
-interface ShapesWithArea extends Shape {
+interface Shapes {
     double calculateArea();
+
 }
 
-class Circle implements ShapesWithArea {
+class Circle implements Shapes {
     private double radius;
 
     Circle(double radius) {
@@ -24,7 +22,7 @@ class Circle implements ShapesWithArea {
     }
 }
 
-class Rectangle implements ShapesWithArea {
+class Rectangle implements Shapes {
     private double length, breadth;
 
     Rectangle(double length, double breadth) {
@@ -38,7 +36,7 @@ class Rectangle implements ShapesWithArea {
 }
 
 public class AreaCalculator {
-    double calculateArea(ShapesWithArea shape) {
+    double calculateArea(Shapes shape) {
         return shape.calculateArea();
     }
 }

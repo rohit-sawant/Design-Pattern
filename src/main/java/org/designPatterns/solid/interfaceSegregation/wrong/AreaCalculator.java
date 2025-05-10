@@ -1,14 +1,15 @@
-package org.example.solid.openClosed.shape.right;
+package org.designPatterns.solid.interfaceSegregation.wrong;
 
-interface Shape {
 
-}
-
-interface ShapesWithArea extends Shape {
+/**
+ * 🛑 wrong examples as All shapes(line) do not have an area we are breaking ISP
+ */
+interface Shapes {
     double calculateArea();
+
 }
 
-class Circle implements ShapesWithArea {
+class Circle implements Shapes {
     private double radius;
 
     Circle(double radius) {
@@ -21,7 +22,7 @@ class Circle implements ShapesWithArea {
     }
 }
 
-class Rectangle implements ShapesWithArea {
+class Rectangle implements Shapes {
     private double length, breadth;
 
     Rectangle(double length, double breadth) {
@@ -35,7 +36,7 @@ class Rectangle implements ShapesWithArea {
 }
 
 public class AreaCalculator {
-    double calculateArea(ShapesWithArea shape) {
+    double calculateArea(Shapes shape) {
         return shape.calculateArea();
     }
 }

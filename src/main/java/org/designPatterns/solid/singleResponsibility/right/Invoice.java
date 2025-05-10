@@ -1,4 +1,4 @@
-package org.example.solid.singleResponsibility.right;
+package org.designPatterns.solid.singleResponsibility.right;
 
 import java.util.List;
 
