@@ -59,9 +59,14 @@ src
 
 </details>
 
-[//]: # (strategy desing pattern)
+[//]: # (strategy design pattern)
 <details>
-<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#strategy-design">Strategy Design</a></summary>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#strategy-design">Strategy Design Pattern</a></summary>
+</details>
+
+[//]: # (Observer design pattern)
+<details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#observer-Design-Pattern">Observer Design Pattern</a></summary>
 </details>
 
 
