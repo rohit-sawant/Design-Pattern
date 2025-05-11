@@ -1,5 +1,6 @@
 package org.designPatterns.solid.liskovSubstitution.right;
 
+// marker interface
 interface Shape {
 
 }
@@ -32,6 +33,10 @@ class Rectangle implements ShapesWithArea {
     public double calculateArea() {
         return length * breadth;
     }
+}
+
+class Line implements  Shape{
+
 }
 
 public class AreaCalculator {

@@ -1,12 +1,21 @@
 package org.designPatterns.solid.liskovSubstitution.wrong;
 
 
-/**
- * 🛑 wrong examples as All shapes(line) do not have an area
- */
+
 interface Shapes {
     double calculateArea();
 
+}
+
+/**
+ * 🛑 wrong examples as All shapes(line) do not have an area
+ */
+class Line implements  Shapes {
+
+    @Override
+    public double calculateArea()  {
+        throw new RuntimeException("line do not support area");
+    }
 }
 
 class Circle implements Shapes {

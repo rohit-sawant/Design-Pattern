@@ -493,5 +493,110 @@ public class PaymentStrategy {
 }
 ```
 
+### Observer Design Pattern
+
+#### Desc
+- Observer Pattern defines a one-to-many dependency between objects so that when one object (the subject) changes state, all its observers are notified and updated automatically
+- Eg Logging system is subscribed by File, Console.
+
+#### Components
+
+##### Observer
+- Defines an `update()` method that is called when the subject changes
+
+```java
+public interface Observer<T> {
+    void update(T data);
+}
+```
+
+- Concrete Observer
+```java
+public class NewsSubscriber implements Observer<News> {
+  private String name;
+
+  public NewsSubscriber(String name) {
+    this.name = name;
+  }
+
+  public void update(News news) {
+    System.out.println(name + " received news: " + news);
+  }
+}
+ 
+```
+```java
+public class News {
+    private String title;
+    private String author;
+    
+    public News(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    public String toString() {
+        return title + " by " + author;
+    }
+}
+
+```
+
+
+##### Subject (Observable)
+- Maintains a `list` of `observers`
+- Provides methods to `add/remove` observers
+- `Notifies` observers of `state changes`
+
+```java
+public interface Subject<T> {
+    void subscribe(Observer<T> o);
+    void unsubscribe(Observer<T> o);
+    void notifyObservers(T data);
+    void setData(T data);
+}
+```
+
+- Concrete Subject
+```java
+public class NewsPublisher implements Subject<News> {
+  private List<Observer<News>> observers = new ArrayList<>();
+
+  public void subscribe(Observer<News> o) {
+    observers.add(o);
+  }
+
+  public void unsubscribe(Observer<News> o) {
+    observers.remove(o);
+  }
+
+  public void notifyObservers(News data) {
+    for (Observer<News> o : observers) {
+      o.update(data);
+    }
+  }
+
+  public void setData(News news) {
+    System.out.println("Publishing: " + news);
+    notifyObservers(news);
+  }
+}
+ 
+```
+
+#### Adv
+
+- Loose Coupling
+- Flexibility with Generics
+- Open/Closed Principle
+- Supports real-time updates
+
+#### Disadv
+- Observer management can be tricky
+- Risk of memory leaks
+- Can introduce performance issues
+
+
+
 
 
