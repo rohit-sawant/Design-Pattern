@@ -69,6 +69,11 @@ src
 <summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#observer-Design-Pattern">Observer Design Pattern</a></summary>
 </details>
 
+[//]: # (Decorator design pattern)
+<details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Decorator-Design-Pattern">Decorator Design Pattern</a></summary>
+</details>
+
 
 
 ---
@@ -600,6 +605,137 @@ public class NewsPublisher implements Subject<News> {
 - Observer management can be tricky
 - Risk of memory leaks
 - Can introduce performance issues
+
+
+#### Decorator Design Pattern
+
+##### Desc
+- The Decorator Design Pattern allows you to `dynamically` add `new behavior` or responsibilities to an object without `modifying` its `existing code`. 
+- It's a `structural` pattern and follows the Open/Closed Principle.
+
+
+##### Adv
+- Open/Closed : Can add WhippedCreamDecorator or VanillaDecorator to coffee without modifying.
+- Flexible Combinations : `Coffee coffee = new MilkDecorator(new SugarDecorator(new SimpleCoffee()));`
+- Single Responsibility : Each decorator has only one job: add sugar, add milk, etc
+- Runtime Behavior : 
+```java 
+if (userWantsMilk) {
+  coffee = new MilkDecorator(coffee);
+}
+```
+
+##### Disadv
+- Order-Sensitive : If decorators are applied in the wrong order, behavior might change.
+- Too Many Small Classes
+- Harder to Debug
+
+##### Class Diagram
+
+![img.png](./img.png)
+##### Components
+
+- Component interface
+```java
+// Coffee.java
+public interface Coffee {
+  String getDescription();
+  double getCost();
+} 
+```
+
+- ConcreteComponent/Base class (Plain coffee)
+```java
+// PlainCoffee.java
+public class PlainCoffee implements Coffee {
+  @Override
+  public String getDescription() {
+    return "Plain Coffee";
+  }
+
+  @Override
+  public double getCost() {
+    return 2.0;
+  }
+} 
+```
+
+- Decorator (Abstract) : it has a reference for decorated `Coffee` object. implement decorator class method to delegate to base class.
+```java
+// CoffeeDecorator.java
+public abstract class CoffeeDecorator implements Coffee {
+  protected Coffee decoratedCoffee;
+
+  public CoffeeDecorator(Coffee decoratedCoffee) {
+    this.decoratedCoffee = decoratedCoffee;
+  }
+
+  @Override
+  public String getDescription() {
+    return decoratedCoffee.getDescription();
+  }
+
+  @Override
+  public double getCost() {
+    return decoratedCoffee.getCost();
+  }
+} 
+```
+
+- Concrete Decorator: 
+```java
+// MilkDecorator.java
+public class MilkDecorator extends CoffeeDecorator {
+    public MilkDecorator(Coffee decoratedCoffee) {
+        super(decoratedCoffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedCoffee.getDescription() + ", Milk";
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost() + 0.5;
+    }
+}
+
+// SugarDecorator.java
+public class SugarDecorator extends CoffeeDecorator {
+    public SugarDecorator(Coffee decoratedCoffee) {
+        super(decoratedCoffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedCoffee.getDescription() + ", Sugar";
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost() + 0.2;
+    }
+}
+```
+
+- Client
+```java
+public class CoffeeMachine {
+    public static void main(String[] args) {
+        Coffee coffee = new BasicCoffee();
+        coffee = new MilkDecorator(new SugarDecorator(coffee));
+
+        System.out.println(coffee.getDescription()); // Basic Coffee, Milk, Sugar
+        System.out.println(coffee.getCost());
+    }
+}
+```
+
+
+
+
+
 
 
 
