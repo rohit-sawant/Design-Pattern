@@ -74,6 +74,11 @@ src
 <summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Decorator-Design-Pattern">Decorator Design Pattern</a></summary>
 </details>
 
+[//]: # (Factory design pattern)
+<details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Factory-Design-Pattern">Factory Design Pattern</a></summary>
+</details>
+
 
 
 ---
@@ -731,6 +736,83 @@ public class CoffeeMachine {
     }
 }
 ```
+
+#### Factory Design Pattern
+
+##### Desc
+- factory design pattern says to define an interface ( A java interface or an abstract class) for creating the object and let the subclasses decide which class to instantiate.
+
+#### UML
+![img_1.png](img_1.png)
+
+##### Example
+
+###### Right
+
+- Component
+```java
+public interface Shape {
+  void draw();
+}
+```
+
+- Concrete Component
+```java
+public class Rectangle implements Shape {
+
+   @Override
+   public void draw() {
+      System.out.println("Inside Rectangle::draw() method.");
+   }
+}
+```
+
+```java
+public class Square implements Shape {
+
+   @Override
+   public void draw() {
+      System.out.println("Inside Square::draw() method.");
+   }
+}
+```
+
+```java
+public class Circle implements Shape {
+
+  @Override
+  public void draw() {
+    System.out.println("Inside Circle::draw() method.");
+  }
+}
+```
+
+- Factory Class : you will be breaking open/closed here due to new shape addition, unless you create new class using extend; but that's not maintainable
+```java
+public class ShapeFactory {
+
+  //use getShape method to get object of type shape 
+  public Shape getShape(String shapeType){
+    if(shapeType == null){
+      return null;
+    }
+    if(shapeType.equalsIgnoreCase("CIRCLE")){
+      return new Circle();
+
+    } else if(shapeType.equalsIgnoreCase("RECTANGLE")){
+      return new Rectangle();
+
+    } else if(shapeType.equalsIgnoreCase("SQUARE")){
+      return new Square();
+    }
+
+    return null;
+  }
+}
+```
+
+
+
 
 
 
