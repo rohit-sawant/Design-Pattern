@@ -82,6 +82,8 @@ src
 [//]: # (Abstract Factory design pattern)
 <details>
 <summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Abstract-Factory-Design-Pattern">Abstract Factory Design Pattern</a></summary>
+</details><details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Prototype-Factory-Design-Pattern">Abstract Factory Design Pattern</a></summary>
 </details>
 
 
@@ -890,7 +892,89 @@ class DarkCheckbox implements Checkbox {
 
 
 
+#### Singleton Design Pattern
+##### Desc
+- The Singleton Design Pattern ensures that a class has only one instance and provides a global point of access to it.
 
+##### Example
+```java
+public class Singleton {
+  private static volatile Singleton instance;
+
+  private Singleton() {}
+
+  public static Singleton getInstance() {
+    if (instance == null) {
+      synchronized (Singleton.class) {
+        if (instance == null)
+          instance = new Singleton();
+      }
+    }
+    return instance;
+  }
+}
+```
+
+- Bill Plough Singleton
+```java
+public class Singleton {
+    private Singleton() {}
+
+    private static class Holder {
+        private static final Singleton INSTANCE = new Singleton();
+    }
+
+    public static Singleton getInstance() {
+        return Holder.INSTANCE;
+    }
+}
+
+```
+#### Prototype Design Pattern
+##### Desc
+- The Prototype is used to deep clone the object
+
+##### Component
+
+- prototype interface
+```java
+public interface Prototype extends Cloneable {
+  Prototype clone();
+} 
+```
+
+- Concrete Prototype
+```java
+public class Document implements Prototype {
+  private String content;
+
+  public Document(String content) {
+    this.content = content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public void print() {
+    System.out.println("Content: " + content);
+  }
+
+  @Override
+  public Document clone() {
+    return new Document(this.content); // Deep copy
+  }
+}
+ 
+```
+##### Adv
+- Avoids Costly Object Creation. Simplifies Object Creation
+
+```java
+Document original = new Document("API Spec", "Rohit");
+// contains attachments, metadata, etc.
+Document version2 = original.clone(); // no need to re-add everythin
+```
 
 
 
