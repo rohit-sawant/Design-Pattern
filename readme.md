@@ -79,6 +79,11 @@ src
 <summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Factory-Design-Pattern">Factory Design Pattern</a></summary>
 </details>
 
+[//]: # (Abstract Factory design pattern)
+<details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Abstract-Factory-Design-Pattern">Abstract Factory Design Pattern</a></summary>
+</details>
+
 
 
 ---
@@ -810,6 +815,82 @@ public class ShapeFactory {
   }
 }
 ```
+
+#### Abstract Factory Design Pattern
+
+##### Desc
+- The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+- Think of it as a super factory that can create multiple types of related objects
+
+##### Components
+- Abstract Factory
+```java
+interface GUIFactory {
+  Button createButton();
+  Checkbox createCheckbox();
+}
+ 
+```
+- Concrete Factory
+```java
+class LightThemeFactory implements GUIFactory {
+    public Button createButton() {
+        return new LightButton();
+    }
+    public Checkbox createCheckbox() {
+        return new LightCheckbox();
+    }
+}
+
+class DarkThemeFactory implements GUIFactory {
+    public Button createButton() {
+        return new DarkButton();
+    }
+    public Checkbox createCheckbox() {
+        return new DarkCheckbox();
+    }
+}
+
+```
+- Abstract Product
+```java
+interface Button {
+    void render();
+}
+
+interface Checkbox {
+    void check();
+}
+
+```
+- Concrete Product
+```java
+class DarkButton implements Button {
+    public void render() {
+        System.out.println("Rendering dark button");
+    }
+}
+
+class DarkCheckbox implements Checkbox {
+    public void check() {
+        System.out.println("Checking dark checkbox");
+    }
+}
+
+```
+
+##### Adv
+- Consistency Among Related Objects (Light theme will give light button and light checkbox)
+- Support O/C principle (you can add new theme without changing any code)
+- Separates Creation from Usage (client just say he wants a theme and rest is been taken care of).
+
+##### Disadv
+- Complexity Increases Quickly (if you wanna add slider to GUI Factory, have to update all the implementation)
+- Tight coupling to families (if you want light button with dark checkbox, not possible).
+
+
+
+
 
 
 
