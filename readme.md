@@ -976,6 +976,104 @@ Document original = new Document("API Spec", "Rohit");
 Document version2 = original.clone(); // no need to re-add everythin
 ```
 
+#### Builder Design Pattern
+
+##### Desc
+- It helps you in creation of object as per requirement.
+
+##### Adv
+- It solves the problem of Factory design pattern
+  - Too Many arguments to pass from client program
+  - unnecessary enforcement to send all parameter
+
+
+##### Disadv
+- Until initialize the properties state will be inconsistent.
+
+
+##### Component
+- Subject 
+  - no constructor
+  - initialization via Subject Builder 
+  - all property will be final
+
+```java
+class House {
+    private boolean hasGarage;
+    private boolean hasSwimmingPool;
+    private boolean hasGarden;
+
+    public void setGarage(boolean value) {
+        this.hasGarage = value;
+    }
+    public void setSwimmingPool(boolean value) {
+        this.hasSwimmingPool = value;
+    }
+    public void setGarden(boolean value) {
+        this.hasGarden = value;
+    }
+
+    public void showSpecs() {
+        System.out.println("House with " +
+            (hasGarage ? "Garage, " : "") +
+            (hasSwimmingPool ? "Swimming Pool, " : "") +
+            (hasGarden ? "Garden" : ""));
+    }
+}
+```
+
+- Subject Builder
+
+```java
+class HouseBuilder {
+    private House house;
+
+    public HouseBuilder() {
+        house = new House();
+    }
+
+    public HouseBuilder addGarage() {
+        house.setGarage(true);
+        return this;
+    }
+
+    public HouseBuilder addSwimmingPool() {
+        house.setSwimmingPool(true);
+        return this;
+    }
+
+    public HouseBuilder addGarden() {
+        house.setGarden(true);
+        return this;
+    }
+
+    public House build() {
+        return house;
+    }
+}
+```
+
+- Usage
+```java
+public class Main {
+  public static void main(String[] args) {
+    House luxuryHouse = new HouseBuilder()
+            .addGarage()
+            .addSwimmingPool()
+            .addGarden()
+            .build();
+
+    luxuryHouse.showSpecs();
+  }
+}
+```
+
+
+
+
+
+
+
 
 
 
