@@ -82,8 +82,12 @@ src
 [//]: # (Abstract Factory design pattern)
 <details>
 <summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Abstract-Factory-Design-Pattern">Abstract Factory Design Pattern</a></summary>
-</details><details>
-<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Prototype-Factory-Design-Pattern">Abstract Factory Design Pattern</a></summary>
+</details>
+<details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Prototype-Design-Pattern">Prototype Design Pattern</a></summary>
+</details>
+<details>
+<summary style="margin-left: 20px;font-size:20px;">&nbsp;<a href="#Builder-Design-Pattern">Builder Design Pattern</a></summary>
 </details>
 
 
