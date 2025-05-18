@@ -1072,8 +1072,79 @@ public class Main {
 }
 ```
 
+#### Adaptor Design Pattern
 
+##### Desc
+- The Adapter pattern converts the interface of a class into another interface that the client expects. 
+- It allows incompatible classes to work together without changing their existing code.
 
+##### adv
+- Reuse of legacy/third-party code without modification.
+- Supports Open/Closed Principle (add new adapters without modifying core).
+- Improves code maintainability
+
+##### disadv
+- Adds extra layer of abstraction.
+- Can make code complex if too many adapters exist.
+- Adaptee’s behavior can still leak into the system if not carefully abstracted.
+
+##### Component
+
+- Target Interface (What your system expects)
+```java
+public interface NotificationSender {
+    void sendNotification(String message);
+}
+
+```
+
+- Adaptee (Existing incompatible class)
+```java
+public class LegacyEmailSender {
+    public void sendEmail(String emailText) {
+        System.out.println("Email sent: " + emailText);
+    }
+}
+```
+
+- Adapter (Wrapper to convert)
+```java
+public class EmailNotificationAdapter implements NotificationSender {
+    private LegacyEmailSender legacyEmailSender;
+
+    public EmailNotificationAdapter(LegacyEmailSender legacyEmailSender) {
+        this.legacyEmailSender = legacyEmailSender;
+    }
+
+    @Override
+    public void sendNotification(String message) {
+        legacyEmailSender.sendEmail(message); // adapts the call
+    }
+}
+```
+
+- Usage
+```java
+public class NotificationService {
+    private NotificationSender sender;
+
+    public NotificationService(NotificationSender sender) {
+        this.sender = sender;
+    }
+
+    public void notifyUser(String message) {
+        sender.sendNotification(message);
+    }
+
+    public static void main(String[] args) {
+        LegacyEmailSender emailSender = new LegacyEmailSender();
+        NotificationSender adapter = new EmailNotificationAdapter(emailSender);
+        NotificationService service = new NotificationService(adapter);
+
+        service.notifyUser("Hello from Adapter Pattern!");
+    }
+}
+```
 
 
 
