@@ -1145,6 +1145,76 @@ public class NotificationService {
     }
 }
 ```
+#### Facade Design Pattern
+
+##### Desc
+- It an abstraction layer to hide complex logic from client. Eg: accelerate in car will get the car moving, but hide all the complexity
+- There is a catch, it abstraction layer should not be inaccessible to client, if needed he can use it.
+
+
+##### Example
+
+- SubSystem
+```java
+
+public interface ProductRepo{
+  public Product getProductById(int id);
+  public boolean isAvailable(Product product);
+}
+public interface Payment{
+    public boolean makePayment();
+}
+
+public interface Invoice{
+  public void generateInvoice();
+}
+
+public interface NotificationService{
+  public void send(int userId);
+}
+```
+
+- Facade Layer
+
+```java
+public class OrderService{
+  ProductRepo productRepo;
+  Payment payment;
+  Invoice invoice;
+  NotificationService notificationService;
+  OrderService(ProductRepo productRepo){ 
+      // add all the component in constructor or a builder class to build it
+      this.productRepo = productRepo;
+  }
+  
+  /**
+   * Without this client had to implement all the logic at this end
+  */
+  public void createOrder(int id,int userId){
+      Product product = productRepo.getProductById(id);
+      if(!product.isAvailable(product)){
+          throw new Exception("order not available");
+      }
+      payment.makePayment();
+      invoice.generateInvoice();
+      notificationService.send(userId);
+  }
+}
+```
+
+##### Adv
+- Abstracts the complexion from client but not hide it, giving more flexibility.
+- Easy to reuse facade layer, thus making changes at single point ,at facade layer
+
+##### DisAdv
+- Hides Complexity (granular logging required to trace which service has thrown an error).
+- May Introduce Performance Overhead due to unnecessary requirement
+- breaks O/C principle.
+
+
+
+
+
 
 
 
