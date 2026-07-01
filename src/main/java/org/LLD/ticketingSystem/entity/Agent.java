@@ -2,6 +2,7 @@ package org.LLD.ticketingSystem.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.LLD.ticketingSystem.enums.IssueType;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@EqualsAndHashCode(callSuper=false)
 public class Agent extends User {
 
     private Issue currentIssue;

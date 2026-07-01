@@ -20,6 +20,7 @@ public class AgentService {
         this.agentRepository = agentRepository;
         this.issueService = issueService;
     }
+
     public Agent addAgent(
             String email,
             String name,
@@ -41,6 +42,7 @@ public class AgentService {
 
         return agent;
     }
+
     public List<Issue> viewAgentHistory(
             String agentEmail) throws Exception {
 
@@ -65,6 +67,6 @@ public class AgentService {
     }
 
     public List<Agent> getAllAgents() {
-        agentRepository.findAll();
+        return agentRepository.findAll();
     }
 }
