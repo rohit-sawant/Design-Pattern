@@ -1,6 +1,8 @@
 package org.LLD.snakeAndLadder.entity;
 
-import javax.management.openmbean.KeyAlreadyExistsException;
+import org.LLD.snakeAndLadder.enums.ObstacleType;
+import org.LLD.snakeAndLadder.factory.ObstacleFactory;
+
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;

@@ -1,8 +1,7 @@
 package org.LLD.snakeAndLadder;
 
 import org.LLD.snakeAndLadder.entity.Board;
-import org.LLD.snakeAndLadder.entity.Obstacle;
-import org.LLD.snakeAndLadder.entity.ObstacleType;
+import org.LLD.snakeAndLadder.enums.ObstacleType;
 import org.LLD.snakeAndLadder.entity.Player;
 
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package org.LLD.snakeAndLadder.entity;
+package org.LLD.snakeAndLadder.enums;
 
 public enum ObstacleType {
     SNAKE,
